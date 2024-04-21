@@ -11,7 +11,7 @@ def create_graph(df):
 
     # Create nodes
     for character in df.columns:
-        nodes.append(Node(id=character, label=character, size=30, color="#d8c7b2"))
+        nodes.append(Node(id=character, label=character, size=15, color="#d8c7b2"))
 
     # Create edges based on the adjacency matrix
     for i, row in df.iterrows():
