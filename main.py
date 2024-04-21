@@ -1,36 +1,35 @@
-import streamlit
+import streamlit as st
+import pandas as pd
 from streamlit_agraph import agraph, Node, Edge, Config
 
-# edge weight a well, so id to id and then weight is the third as well as all the ids
+def load_data(filepath):
+    return pd.read_csv(filepath, index_col=0)
 
-nodes = []
-edges = []
-nodes.append( Node(id="Spiderman", 
-                   label="Peter Parker", 
-                   size=25, 
-                   shape="circularImage",
-                   image="http://marvel-force-chart.surge.sh/marvel_force_chart_img/top_spiderman.png") 
-            ) # includes **kwargs
-nodes.append( Node(id="Captain_Marvel", 
-                   size=25,
-                   shape="circularImage",
-                   image="http://marvel-force-chart.surge.sh/marvel_force_chart_img/top_captainmarvel.png") 
-            )
-edges.append( Edge(source="Captain_Marvel", 
-                   label="friend_of", 
-                   target="Spiderman", 
-                   # **kwargs
-                   ) 
-            ) 
+def create_graph(df):
+    nodes = []
+    edges = []
 
-config = Config(width=750,
-                height=950,
-                directed=True, 
-                physics=True, 
-                hierarchical=False,
-                # **kwargs
-                )
+    # Create nodes
+    for character in df.columns:
+        nodes.append(Node(id=character, label=character, size=25))
 
-return_value = agraph(nodes=nodes, 
-                      edges=edges, 
-                      config=config)
+    # Create edges based on the adjacency matrix
+    for i, row in df.iterrows():
+        for j, value in row.items():
+            if value != 0:  # Assuming only non-zero values should create edges
+                edges.append(Edge(source=i, target=j, label=str(value)))
+
+    # Graph configuration
+    config = Config(width=750, height=950, directed=False, physics=True, hierarchical=False)
+
+    # Display the graph
+    return_value = agraph(nodes=nodes, edges=edges, config=config)
+    return return_value
+
+# Streamlit interface
+def main():
+    df = load_data("adjmatrix.csv")
+    create_graph(df)
+
+if __name__ == '__main__':
+    main()
