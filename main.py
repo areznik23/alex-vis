@@ -11,7 +11,7 @@ def create_graph(df):
 
     # Create nodes
     for character in df.columns:
-        nodes.append(Node(id=character, label=character, size=10))
+        nodes.append(Node(id=character, label=character, size=30))
 
     # Create edges based on the adjacency matrix
     for i, row in df.iterrows():
@@ -20,7 +20,19 @@ def create_graph(df):
                 edges.append(Edge(source=i, target=j, label=str(value)))
 
     # Graph configuration
-    config = Config(width=1000, height=1200, directed=False, physics=True, hierarchical=False)
+    config = Config(width=1000, height=1200, directed=False, hierarchical=False, physics={
+                        "barnesHut": {
+                            "gravitationalConstant": -8000,  # Increased repulsive force
+                            "centralGravity": 0.3,
+                            "springLength": 200,  # Increased spring length
+                            "springConstant": 0.04,
+                            "damping": 0.09,
+                            "avoidOverlap": 0.1
+                        },
+                        "minVelocity": 0.75,
+                        "solver": "barnesHut",
+                        "timestep": 0.5
+                    },)
 
     # Display the graph
     return_value = agraph(nodes=nodes, edges=edges, config=config)
