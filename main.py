@@ -20,7 +20,7 @@ def create_graph(df):
                 edges.append(Edge(source=i, target=j, label=str(value)))
 
     # Graph configuration
-    config = Config(width=1000, height=1200, directed=False, hierarchical=False, physics={
+    config = Config(width=2000, height=2000, directed=False, hierarchical=False, physics={
                         "barnesHut": {
                             "gravitationalConstant": -8000,  # Increased repulsive force
                             "centralGravity": 0.3,
