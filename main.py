@@ -11,13 +11,13 @@ def create_graph(df):
 
     # Create nodes
     for character in df.columns:
-        nodes.append(Node(id=character, label=character, size=30))
+        nodes.append(Node(id=character, label=character, size=30, color="#D8C7B2"))
 
     # Create edges based on the adjacency matrix
     for i, row in df.iterrows():
         for j, value in row.items():
             if value != 0:  # Assuming only non-zero values should create edges
-                edges.append(Edge(source=i, target=j, label=str(value)))
+                edges.append(Edge(source=i, target=j, width=value * 0.1, color="#E6D0AB"))
 
     # Graph configuration
     config = Config(width=2000, height=2000, directed=False, hierarchical=False, physics={
