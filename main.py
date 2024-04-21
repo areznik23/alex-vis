@@ -17,7 +17,7 @@ def create_graph(df):
     for i, row in df.iterrows():
         for j, value in row.items():
             if value != 0:  # Assuming only non-zero values should create edges
-                edges.append(Edge(source=i, target=j, value=value, length=10))
+                edges.append(Edge(source=i, target=j, label=str(value), length=10))
 
     # Graph configuration
     config = Config(width=1000, height=1200, directed=False, physics=True, hierarchical=False)
