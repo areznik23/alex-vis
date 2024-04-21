@@ -11,7 +11,7 @@ def create_graph(df):
 
     # Create nodes
     for character in df.columns:
-        nodes.append(Node(id=character, label=character, size=25))
+        nodes.append(Node(id=character, label=character, size=10))
 
     # Create edges based on the adjacency matrix
     for i, row in df.iterrows():
@@ -20,7 +20,7 @@ def create_graph(df):
                 edges.append(Edge(source=i, target=j, label=str(value)))
 
     # Graph configuration
-    config = Config(width=750, height=950, directed=False, physics=True, hierarchical=False)
+    config = Config(width=1000, height=1200, directed=False, physics=True, hierarchical=False)
 
     # Display the graph
     return_value = agraph(nodes=nodes, edges=edges, config=config)
