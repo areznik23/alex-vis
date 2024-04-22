@@ -22,13 +22,13 @@ def create_graph(df):
 
     # Graph configuration
     config = Config(width=2000, height=2000, directed=False, hierarchical=False, physics={
-                        "barnesHut": {
-                            "gravitationalConstant": -8000,  # Increased repulsive force
-                            "centralGravity": 0.3,
-                            "springLength": 200,  # Increased spring length
-                            "springConstant": 0.04,
+                       "barnesHut": {
+                            "gravitationalConstant": -15000,  # More negative for increased repulsion
+                            "centralGravity": 0.1,  # Reduced to allow more dispersion
+                            "springLength": 300,  # Increased for greater distance between nodes
+                            "springConstant": 0.05,
                             "damping": 0.09,
-                            "avoidOverlap": 0.1
+                            "avoidOverlap": 0.2  # Increased to prevent nodes from overlapping
                         },
                         "minVelocity": 0.75,
                         "solver": "barnesHut",
