@@ -21,7 +21,7 @@ def create_graph(df):
                 edges.append(Edge(source=i, target=j, width=value * 0.3, color="#e6d0ab"))
 
     # Graph configuration
-    config = Config(width=2000, height=2000, directed=False, hierarchical=False, physics={
+    config = Config(width=2000, height=2000, directed=False, hierarchical=False, backgroundColor="#00000", physics={
                          "barnesHut": {
                             "gravitationalConstant": -15000,  # More negative for increased repulsion
                             "centralGravity": 0.1,  # Reduced to allow more dispersion
